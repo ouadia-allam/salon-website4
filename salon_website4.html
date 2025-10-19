@@ -1,0 +1,1412 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>StyleHub - Hair Salon for Everyone</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-green: #2D7A3E;
+            --light-green: #A8D08D;
+            --dark-green: #1B4D2E;
+            --cream: #F5F8F3;
+            --dark: #1A1A1A;
+            --white: #FFFFFF;
+            --shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            color: var(--dark);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /* HEADER */
+        header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            transition: all 0.3s ease;
+            background: transparent;
+        }
+
+        header.scrolled {
+            background: var(--white);
+            box-shadow: var(--shadow);
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.5rem 5%;
+            max-width: 1400px;
+            margin: 0 auto;
+            width: 100%;
+        }
+
+        .logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--dark);
+            text-decoration: none;
+            letter-spacing: 1px;
+        }
+
+        header.scrolled .logo {
+            color: var(--primary-green);
+        }
+
+        nav {
+            display: flex;
+            gap: 3rem;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: var(--white);
+            font-weight: 500;
+            position: relative;
+            transition: color 0.3s;
+            pointer-events: auto;
+        }
+
+        header.scrolled nav a {
+            color: var(--dark);
+        }
+
+        nav a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--light-green);
+            transition: width 0.3s ease;
+        }
+
+        nav a:hover::after {
+            width: 100%;
+        }
+
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+            gap: 6px;
+            background: none;
+            border: none;
+            padding: 10px;
+            z-index: 1001;
+            width: 50px;
+            height: 50px;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .hamburger span {
+            width: 28px;
+            height: 3px;
+            background: var(--white);
+            border-radius: 2px;
+            transition: all 0.4s ease;
+            display: block;
+        }
+
+        header.scrolled .hamburger span {
+            background: var(--dark);
+        }
+
+        .hamburger.active span:nth-child(1) {
+            transform: rotate(45deg) translate(10px, 10px);
+            background: var(--primary-green);
+        }
+
+        .hamburger.active span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .hamburger.active span:nth-child(3) {
+            transform: rotate(-45deg) translate(8px, -8px);
+            background: var(--primary-green);
+        }
+
+        /* HERO */
+        .hero {
+            height: 100vh;
+            background: linear-gradient(135deg, var(--dark-green) 0%, var(--primary-green) 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+            margin-top: 0;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at center, transparent 0%, rgba(0,0,0,0.3) 100%);
+        }
+
+        .hero-content {
+            text-align: center;
+            color: var(--white);
+            position: relative;
+            z-index: 2;
+            animation: fadeInUp 0.8s ease 0.3s backwards;
+        }
+
+        .hero h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 4rem;
+            margin-bottom: 1rem;
+            font-weight: 900;
+            letter-spacing: 2px;
+        }
+
+        .hero p {
+            font-size: 1.3rem;
+            margin-bottom: 2rem;
+            font-weight: 300;
+            animation: fadeInUp 0.8s ease 0.5s backwards;
+        }
+
+        .cta-btn {
+            display: inline-block;
+            background: var(--light-green);
+            color: var(--dark-green);
+            padding: 1rem 2.5rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.4s ease;
+            border: 2px solid var(--light-green);
+            cursor: pointer;
+            animation: slideUp 0.8s ease 0.7s backwards;
+        }
+
+        .cta-btn:hover {
+            background: transparent;
+            color: var(--light-green);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(168, 208, 141, 0.4);
+        }
+
+        /* ANIMATIONS */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes scaleIn {
+            from {
+                opacity: 0;
+                transform: scale(0.95);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        /* SERVICES PREVIEW */
+        .services-preview {
+            padding: 6rem 5%;
+            background: var(--white);
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            text-align: center;
+            margin-bottom: 3rem;
+            color: var(--dark-green);
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .service-card {
+            background: var(--white);
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: all 0.4s ease;
+            cursor: pointer;
+            animation: scaleIn 0.6s ease backwards;
+            border-top: 4px solid var(--primary-green);
+        }
+
+        .service-card:nth-child(1) { animation-delay: 0.1s; }
+        .service-card:nth-child(2) { animation-delay: 0.2s; }
+        .service-card:nth-child(3) { animation-delay: 0.3s; }
+
+        .service-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(45, 122, 62, 0.2);
+        }
+
+        .service-icon {
+            height: 200px;
+            background: linear-gradient(135deg, var(--primary-green), var(--light-green));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4rem;
+            color: var(--white);
+        }
+
+        .service-info {
+            padding: 2rem;
+            text-align: center;
+        }
+
+        .service-info h3 {
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+            color: var(--dark-green);
+        }
+
+        .service-info p {
+            color: #666;
+            margin-bottom: 1.5rem;
+            font-size: 0.95rem;
+        }
+
+        .service-info a {
+            color: var(--primary-green);
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s;
+            display: inline-block;
+        }
+
+        .service-info a:hover {
+            color: var(--light-green);
+        }
+
+        /* WHY CHOOSE US */
+        .why-choose {
+            padding: 6rem 5%;
+            background: var(--cream);
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2.5rem;
+            margin-top: 3rem;
+        }
+
+        .feature {
+            text-align: center;
+            opacity: 0;
+            animation: fadeInUp 0.6s ease forwards;
+            padding: 2rem;
+            background: var(--white);
+            border-radius: 12px;
+            box-shadow: var(--shadow);
+        }
+
+        .feature:nth-child(1) { animation-delay: 0.1s; }
+        .feature:nth-child(2) { animation-delay: 0.2s; }
+        .feature:nth-child(3) { animation-delay: 0.3s; }
+        .feature:nth-child(4) { animation-delay: 0.4s; }
+
+        .feature-icon {
+            font-size: 3rem;
+            color: var(--primary-green);
+            margin-bottom: 1rem;
+        }
+
+        .feature h4 {
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+            color: var(--dark-green);
+        }
+
+        .feature p {
+            color: #666;
+            font-size: 0.95rem;
+        }
+
+        /* GALLERY */
+        .gallery {
+            padding: 6rem 5%;
+            background: var(--white);
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-top: 3rem;
+        }
+
+        .gallery-item {
+            position: relative;
+            overflow: hidden;
+            border-radius: 12px;
+            aspect-ratio: 1;
+            cursor: pointer;
+            box-shadow: var(--shadow);
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.4s ease;
+        }
+
+        .gallery-item:hover img {
+            transform: scale(1.1);
+        }
+
+        .gallery-item-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(45, 122, 62, 0.85);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            font-size: 2rem;
+            color: var(--white);
+        }
+
+        .gallery-item:hover .gallery-item-overlay {
+            opacity: 1;
+        }
+
+        /* ABOUT SECTION */
+        .about {
+            padding: 6rem 5%;
+            background: var(--white);
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .about-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+            margin-top: 3rem;
+        }
+
+        .about-content h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2rem;
+            color: var(--dark-green);
+            margin-bottom: 1.5rem;
+        }
+
+        .about-content p {
+            color: #666;
+            margin-bottom: 1.5rem;
+            line-height: 1.8;
+            font-size: 1rem;
+        }
+
+        .about-image {
+            width: 100%;
+            height: 400px;
+            background: linear-gradient(135deg, var(--primary-green), var(--light-green));
+            border-radius: 16px;
+            box-shadow: var(--shadow);
+            animation: slideUp 0.8s ease;
+        }
+
+        .team-section {
+            margin-top: 4rem;
+            padding-top: 3rem;
+            border-top: 2px solid var(--light-green);
+        }
+
+        .team-section h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2rem;
+            color: var(--dark-green);
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .team-member {
+            text-align: center;
+            animation: scaleIn 0.6s ease backwards;
+        }
+
+        .team-member:nth-child(1) { animation-delay: 0.1s; }
+        .team-member:nth-child(2) { animation-delay: 0.2s; }
+        .team-member:nth-child(3) { animation-delay: 0.3s; }
+
+        .team-member-image {
+            width: 150px;
+            height: 150px;
+            background: linear-gradient(135deg, var(--primary-green), var(--light-green));
+            border-radius: 50%;
+            margin: 0 auto 1rem;
+            box-shadow: var(--shadow);
+        }
+
+        .team-member h4 {
+            font-size: 1.3rem;
+            color: var(--dark-green);
+            margin-bottom: 0.3rem;
+        }
+
+        .team-member p {
+            color: var(--primary-green);
+            font-weight: 600;
+            font-size: 0.95rem;
+        }
+        .testimonials {
+            padding: 6rem 5%;
+            background: var(--cream);
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .testimonials-container {
+            position: relative;
+            max-width: 800px;
+            margin: 3rem auto;
+        }
+
+        .testimonial-card {
+            background: var(--white);
+            padding: 2.5rem;
+            border-radius: 16px;
+            text-align: center;
+            box-shadow: var(--shadow);
+            animation: fadeIn 0.6s ease;
+            border-left: 5px solid var(--primary-green);
+        }
+
+        .testimonial-stars {
+            color: var(--primary-green);
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
+        }
+
+        .testimonial-text {
+            font-style: italic;
+            color: #666;
+            margin-bottom: 1.5rem;
+            line-height: 1.8;
+        }
+
+        .testimonial-author {
+            font-weight: 600;
+            color: var(--dark-green);
+        }
+
+        .testimonial-nav {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .testimonial-btn {
+            background: var(--primary-green);
+            border: none;
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--white);
+            transition: all 0.3s ease;
+            font-size: 1.2rem;
+        }
+
+        .testimonial-btn:hover {
+            background: var(--dark-green);
+            transform: scale(1.1);
+        }
+
+        /* BOOKING FORM */
+        .booking {
+            padding: 6rem 5%;
+            background: var(--white);
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .booking-container {
+            max-width: 600px;
+            margin: 0 auto;
+            background: var(--cream);
+            padding: 3rem;
+            border-radius: 16px;
+            box-shadow: var(--shadow);
+            animation: slideUp 0.8s ease;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: var(--dark-green);
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 0.8rem;
+            border: 2px solid var(--light-green);
+            border-radius: 8px;
+            font-family: 'Poppins', sans-serif;
+            transition: all 0.3s ease;
+            font-size: 1rem;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--primary-green);
+            box-shadow: 0 0 0 3px rgba(45, 122, 62, 0.1);
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 120px;
+        }
+
+        .form-submit {
+            width: 100%;
+            background: var(--primary-green);
+            color: var(--white);
+            padding: 1rem;
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.4s ease;
+            font-size: 1rem;
+        }
+
+        .form-submit:hover {
+            background: var(--dark-green);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(45, 122, 62, 0.2);
+        }
+
+        /* FOOTER */
+        footer {
+            background: var(--dark-green);
+            color: var(--white);
+            padding: 3rem 5%;
+            max-width: auto ;
+            margin: 0 auto;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-section h4 {
+            margin-bottom: 1rem;
+            color: var(--light-green);
+        }
+
+        .footer-section a {
+            display: block;
+            color: var(--white);
+            text-decoration: none;
+            margin-bottom: 0.5rem;
+            transition: color 0.3s;
+        }
+
+        .footer-section a:hover {
+            color: var(--light-green);
+        }
+
+        .social-icons {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .social-icons a {
+            width: 40px;
+            height: 40px;
+            background: var(--primary-green);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--white);
+            margin: 0;
+            transition: all 0.3s;
+        }
+
+        .social-icons a:hover {
+            background: var(--light-green);
+            color: var(--dark-green);
+            transform: translateY(-3px);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            border-top: 1px solid rgba(168, 208, 141, 0.3);
+            padding-top: 2rem;
+            color: #aaa;
+        }
+
+        /* WHATSAPP BUTTON */
+        .whatsapp-btn {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            width: 60px;
+            height: 60px;
+            background: #25D366;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: 0 4px 12px rgba(37, 211, 102, 0.4);
+            transition: all 0.3s ease;
+            z-index: 999;
+            text-decoration: none;
+            color: var(--white);
+            font-size: 1.8rem;
+        }
+
+        .whatsapp-btn:hover {
+            transform: scale(1.1);
+            box-shadow: 0 6px 20px rgba(37, 211, 102, 0.6);
+        }
+
+        /* TABLET */
+        @media (max-width: 1024px) {
+            .header-content {
+                padding: 1.2rem 3%;
+            }
+
+            nav {
+                gap: 2rem;
+            }
+
+            .hero h1 {
+                font-size: 3rem;
+            }
+
+            .section-title {
+                font-size: 2.2rem;
+            }
+
+            .services-preview,
+            .why-choose,
+            .gallery,
+            .testimonials,
+            .booking {
+                padding: 4rem 3%;
+            }
+
+            .booking-container {
+                padding: 2.5rem;
+            }
+        }
+
+        /* MOBILE */
+        @media (max-width: 768px) {
+            .hamburger {
+                display: flex !important;
+            }
+
+            nav {
+                position: fixed !important;
+                left: 0 !important;
+                top: 65px !important;
+                flex-direction: column !important;
+                background: var(--dark-green) !important;
+                width: 100% !important;
+                text-align: center !important;
+                transition: all 0.4s ease !important;
+                padding: 2rem 0 !important;
+                gap: 0 !important;
+                box-shadow: var(--shadow) !important;
+                max-height: 0 !important;
+                overflow: hidden !important;
+                opacity: 0 !important;
+                z-index: 999 !important;
+            }
+
+            nav.active {
+                max-height: 500px !important;
+                opacity: 1 !important;
+            }
+
+            nav a {
+                padding: 1rem 0 !important;
+                display: block !important;
+                border-bottom: 1px solid rgba(168, 208, 141, 0.2) !important;
+                color: var(--white) !important;
+                pointer-events: auto !important;
+                cursor: pointer !important;
+            }
+
+            nav a::after {
+                display: none !important;
+            }
+
+            .header-content {
+                padding: 1rem 3%;
+            }
+
+            .logo {
+                font-size: 1.5rem;
+            }
+
+            .hero {
+                height: 80vh;
+            }
+
+            .hero h1 {
+                font-size: 2rem;
+                line-height: 1.2;
+            }
+
+            .hero p {
+                font-size: 0.95rem;
+                margin-bottom: 1.5rem;
+            }
+
+            .cta-btn {
+                padding: 0.9rem 2rem;
+                font-size: 0.95rem;
+            }
+
+            .section-title {
+                font-size: 1.8rem;
+                margin-bottom: 2rem;
+            }
+
+            .services-preview,
+            .why-choose,
+            .gallery,
+            .testimonials,
+            .booking {
+                padding: 3rem 4%;
+            }
+
+            .service-icon {
+                height: 150px;
+                font-size: 3rem;
+            }
+
+            .service-info {
+                padding: 1.5rem;
+            }
+
+            .service-info h3 {
+                font-size: 1.3rem;
+            }
+
+            .booking-container {
+                padding: 2rem 1.5rem;
+                max-width: 100%;
+            }
+
+            .form-group input,
+            .form-group select,
+            .form-group textarea {
+                padding: 0.7rem;
+                font-size: 16px;
+            }
+
+            .form-submit {
+                padding: 0.9rem;
+            }
+
+            .footer-content {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+                text-align: center;
+            }
+
+            .footer-section {
+                text-align: center;
+            }
+
+            .social-icons {
+                justify-content: center;
+            }
+
+            .whatsapp-btn {
+                bottom: 1.5rem;
+                right: 1.5rem;
+                width: 55px;
+                height: 55px;
+                font-size: 1.5rem;
+            }
+
+            .testimonial-card {
+                padding: 2rem 1.5rem;
+            }
+
+            .gallery-item {
+                aspect-ratio: 1;
+            }
+        }
+
+        /* SMALL MOBILE */
+        @media (max-width: 480px) {
+            .header-content {
+                padding: 0.8rem 2%;
+            }
+
+            .logo {
+                font-size: 1.2rem;
+            }
+
+            .hamburger span {
+                width: 22px;
+                height: 2.5px;
+            }
+
+            .hero {
+                height: 70vh;
+            }
+
+            .hero h1 {
+                font-size: 1.6rem;
+            }
+
+            .hero p {
+                font-size: 0.85rem;
+            }
+
+            .cta-btn {
+                padding: 0.8rem 1.8rem;
+                font-size: 0.9rem;
+            }
+
+            .section-title {
+                font-size: 1.5rem;
+                margin-bottom: 1.5rem;
+            }
+
+            .services-preview,
+            .why-choose,
+            .gallery,
+            .testimonials,
+            .booking {
+                padding: 2.5rem 3%;
+            }
+
+            .service-icon {
+                height: 120px;
+                font-size: 2.5rem;
+            }
+
+            .feature-icon {
+                font-size: 2.5rem;
+            }
+
+            .feature h4 {
+                font-size: 1.1rem;
+            }
+
+            .booking-container {
+                padding: 1.5rem 1rem;
+            }
+
+            .form-group {
+                margin-bottom: 1.2rem;
+            }
+
+            .form-group label {
+                font-size: 0.95rem;
+            }
+
+            .testimonial-btn {
+                width: 40px;
+                height: 40px;
+                font-size: 1rem;
+            }
+
+            .whatsapp-btn {
+                bottom: 1rem;
+                right: 1rem;
+                width: 50px;
+                height: 50px;
+                font-size: 1.3rem;
+            }
+
+            .social-icons {
+                gap: 0.8rem;
+            }
+
+            .social-icons a {
+                width: 36px;
+                height: 36px;
+                font-size: 0.9rem;
+            }
+
+            .footer-bottom {
+                font-size: 0.9rem;
+            }
+        }
+
+        /* EXTRA SMALL */
+        @media (max-width: 360px) {
+            .hero h1 {
+                font-size: 1.4rem;
+            }
+
+            .section-title {
+                font-size: 1.3rem;
+            }
+
+            .cta-btn {
+                padding: 0.7rem 1.5rem;
+                font-size: 0.85rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- HEADER -->
+    <header id="header">
+        <div class="header-content">
+            <a href="#home" class="logo">StyleHub</a>
+            <nav id="nav">
+                <a href="#home">Home</a>
+                <a href="#services">Services</a>
+                <a href="#about">About</a>
+                <a href="#gallery">Gallery</a>
+                <a href="#booking">Booking</a>
+                <a href="#contact">Contact</a>
+            </nav>
+            <div class="hamburger" id="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </header>
+
+    <!-- HERO -->
+    <section class="hero" id="home">
+        <div class="hero-content">
+            <h1>Style for Everyone</h1>
+            <p>Professional haircuts and styling for the whole family</p>
+            <a href="#booking" class="cta-btn">Book Your Appointment</a>
+        </div>
+    </section>
+
+    <!-- SERVICES PREVIEW -->
+    <section class="services-preview" id="services">
+        <h2 class="section-title">Our Services</h2>
+        <div class="services-grid">
+            <div class="service-card">
+                <div class="service-icon">👨</div>
+                <div class="service-info">
+                    <h3>For Men</h3>
+                    <p>Professional haircuts, fades, beard trims, and styling</p>
+                    <a href="#">View Services →</a>
+                </div>
+            </div>
+            <div class="service-card">
+                <div class="service-icon">👩</div>
+                <div class="service-info">
+                    <h3>For Women</h3>
+                    <p>Cuts, coloring, treatments, blow-dry and bridal styling</p>
+                    <a href="#">View Services →</a>
+                </div>
+            </div>
+            <div class="service-card">
+                <div class="service-icon">👧</div>
+                <div class="service-info">
+                    <h3>For Kids</h3>
+                    <p>Fun, friendly haircuts and styling for children</p>
+                    <a href="#">View Services →</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- WHY CHOOSE US -->
+    <section class="why-choose">
+        <h2 class="section-title">Why Choose StyleHub</h2>
+        <div class="features-grid">
+            <div class="feature">
+                <div class="feature-icon">⭐</div>
+                <h4>Professional Stylists</h4>
+                <p>Experienced and certified professionals dedicated to your style</p>
+            </div>
+            <div class="feature">
+                <div class="feature-icon">👨‍👩‍👧</div>
+                <h4>Family Friendly</h4>
+                <p>Welcoming environment for men, women, and children</p>
+            </div>
+            <div class="feature">
+                <div class="feature-icon">✨</div>
+                <h4>Premium Products</h4>
+                <p>Top-quality hair care products for best results</p>
+            </div>
+            <div class="feature">
+                <div class="feature-icon">🚀</div>
+                <h4>Easy Booking</h4>
+                <p>Quick and convenient appointment scheduling</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ABOUT US -->
+    <section class="about" id="about">
+        <h2 class="section-title">About StyleHub</h2>
+        <div class="about-container">
+            <div class="about-content">
+                <h3>Our Story</h3>
+                <p>StyleHub was founded with a simple mission: to provide professional, high-quality hair services for everyone in our community. Whether you're looking for a fresh cut, a complete makeover, or a special styling occasion, our team is dedicated to making you feel confident and beautiful.</p>
+                <p>With over 15 years of combined experience in the beauty industry, our stylists stay updated with the latest trends and techniques to ensure you always leave our salon looking and feeling your best.</p>
+                <p>We believe in creating a warm, welcoming environment where every client feels valued. From kids getting their first haircut to families celebrating milestones, StyleHub is where style meets care.</p>
+            </div>
+            <div class="about-image"></div>
+        </div>
+
+        <div class="team-section">
+            <h3>Meet Our Team</h3>
+            <div class="team-grid">
+                <div class="team-member">
+                    <div class="team-member-image"></div>
+                    <h4>Alex Morgan</h4>
+                    <p>Senior Stylist</p>
+                </div>
+                <div class="team-member">
+                    <div class="team-member-image"></div>
+                    <h4>Jessica Lee</h4>
+                    <p>Color Specialist</p>
+                </div>
+                <div class="team-member">
+                    <div class="team-member-image"></div>
+                    <h4>David Smith</h4>
+                    <p>Barber & Stylist</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- GALLERY -->
+    <section class="gallery" id="gallery">
+        <h2 class="section-title">Gallery</h2>
+        <div class="gallery-grid">
+            <div class="gallery-item">
+                <div style="width:100%; height:100%; background: linear-gradient(135deg, #1B4D2E, #2D7A3E);"></div>
+                <div class="gallery-item-overlay"><i class="fas fa-search-plus"></i></div>
+            </div>
+            <div class="gallery-item">
+                <div style="width:100%; height:100%; background: linear-gradient(135deg, #A8D08D, #1B4D2E);"></div>
+                <div class="gallery-item-overlay"><i class="fas fa-search-plus"></i></div>
+            </div>
+            <div class="gallery-item">
+                <div style="width:100%; height:100%; background: linear-gradient(135deg, #2D7A3E, #1B4D2E);"></div>
+                <div class="gallery-item-overlay"><i class="fas fa-search-plus"></i></div>
+            </div>
+            <div class="gallery-item">
+                <div style="width:100%; height:100%; background: linear-gradient(135deg, #A8D08D, #2D7A3E);"></div>
+                <div class="gallery-item-overlay"><i class="fas fa-search-plus"></i></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- TESTIMONIALS -->
+    <section class="testimonials">
+        <h2 class="section-title">What Our Clients Say</h2>
+        <div class="testimonials-container">
+            <div class="testimonial-card" id="testimonial">
+                <div class="testimonial-stars">★★★★★</div>
+                <p class="testimonial-text">"Amazing experience! The stylists are professionals and the salon has a great atmosphere. Highly recommend!"</p>
+                <p class="testimonial-author">Sarah Johnson</p>
+            </div>
+            <div class="testimonial-nav">
+                <button class="testimonial-btn" onclick="prevTestimonial()">❮</button>
+                <button class="testimonial-btn" onclick="nextTestimonial()">❯</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- BOOKING -->
+    <section class="booking" id="booking">
+  <h2 class="section-title">Book Your Appointment</h2>
+  <div class="booking-container">
+    <form id="bookingForm">
+      <!-- Full Name -->
+      <div class="form-group">
+        <label for="name">Full Name</label>
+        <input type="text" id="name" name="name" placeholder="Enter your full name" required>
+      </div>
+
+      <!-- Phone Number -->
+      <div class="form-group">
+        <label for="phone">Phone Number</label>
+        <input type="tel" id="phone" name="phone" placeholder="e.g. +212 600 000 000" required>
+      </div>
+
+      <!-- Service Type -->
+      <div class="form-group">
+        <label for="service">Service Type</label>
+        <select id="service" name="service" required>
+          <option value="">Select a service</option>
+          <option value="Men's Haircut">Men's Haircut</option>
+          <option value="Women's Haircut">Women's Haircut</option>
+          <option value="Children's Haircut">Children's Haircut</option>
+          <option value="Beard Trim">Beard Trim</option>
+          <option value="Coloring">Coloring</option>
+          <option value="Styling">Styling</option>
+        </select>
+      </div>
+
+      <!-- Preferred Date -->
+      <div class="form-group">
+        <label for="date">Preferred Date</label>
+        <input type="date" id="date" name="date" required>
+      </div>
+
+      <!-- Additional Notes -->
+      <div class="form-group">
+        <label for="notes">Additional Notes</label>
+        <textarea id="notes" name="notes" placeholder="Any special requests..."></textarea>
+      </div>
+
+      <!-- Submit Button -->
+      <button type="submit" class="form-submit">Book Appointment</button>
+      <button type="submit">Submit</button>
+    </form>
+  </div>
+</section>
+
+
+    <!-- FOOTER -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h4>Quick Links</h4>
+                <a href="#home">Home</a>
+                <a href="#services">Services</a>
+                <a href="#gallery">Gallery</a>
+                <a href="#booking">Book Now</a>
+            </div>
+            <div class="footer-section">
+                <h4>Opening Hours</h4>
+                <p>Monday - Friday: 9am - 6pm</p>
+                <p>Saturday: 10am - 5pm</p>
+                <p>Sunday: Closed</p>
+            </div>
+            <div class="footer-section">
+                <h4>Contact</h4>
+                <a href="tel:+1234567890">+1 (234) 567-8900</a>
+                <a href="mailto:info@stylehub.com">info@stylehub.com</a>
+                <div class="social-icons">
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-facebook"></i></a>
+                    <a href="#"><i class="fab fa-tiktok"></i></a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2024 StyleHub. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- WHATSAPP BUTTON -->
+    <a href="https://wa.me/1234567890" class="whatsapp-btn" target="_blank" title="Chat on WhatsApp">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+
+    <script>
+        // MOBILE MENU
+        document.addEventListener('DOMContentLoaded', function() {
+            const hamburger = document.getElementById('hamburger');
+            const nav = document.getElementById('nav');
+
+            if (hamburger && nav) {
+                hamburger.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    nav.classList.toggle('active');
+                    hamburger.classList.toggle('active');
+                });
+
+                // Close menu when clicking nav links
+                nav.querySelectorAll('a').forEach(link => {
+                    link.addEventListener('click', function(e) {
+                        e.stopPropagation();
+                        nav.classList.remove('active');
+                        hamburger.classList.remove('active');
+                    });
+                });
+            }
+        });
+
+        // HEADER SCROLL
+        const header = document.getElementById('header');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+
+        // TESTIMONIALS
+        const testimonials = [
+            {
+                text: "Amazing experience! The stylists are professionals and the salon has a great atmosphere. Highly recommend!",
+                author: "Sarah Johnson",
+                stars: "★★★★★"
+            },
+            {
+                text: "My whole family gets their hair done here. Everyone loves the service and quality. Best salon in town!",
+                author: "Michael Chen",
+                stars: "★★★★★"
+            },
+            {
+                text: "The kids loved getting their haircuts! The staff made them feel comfortable and the results are perfect.",
+                author: "Emma Wilson",
+                stars: "★★★★★"
+            }
+        ];
+
+        let currentTestimonial = 0;
+
+        function updateTestimonial() {
+            const card = document.getElementById('testimonial');
+            card.style.animation = 'none';
+            setTimeout(() => {
+                card.textContent = '';
+                const t = testimonials[currentTestimonial];
+                card.innerHTML = `
+                    <div class="testimonial-stars">${t.stars}</div>
+                    <p class="testimonial-text">"${t.text}"</p>
+                    <p class="testimonial-author">${t.author}</p>
+                `;
+                card.style.animation = 'fadeIn 0.6s ease';
+            }, 100);
+        }
+
+        function nextTestimonial() {
+            currentTestimonial = (currentTestimonial + 1) % testimonials.length;
+            updateTestimonial();
+        }
+
+        function prevTestimonial() {
+            currentTestimonial = (currentTestimonial - 1 + testimonials.length) % testimonials.length;
+            updateTestimonial();
+        }
+    </script>
+</body>
+<script>
+  const scriptURL = "https://script.google.com/macros/s/AKfycbxM6MEweKB20Axzz4xlDn2tQeez4HEHU0Am87RdVT2_EmaGnkrb03rOKPIRddWUODQX/exec";
+
+  document.getElementById("bookingForm").addEventListener("submit", async function(e) {
+    e.preventDefault();
+
+    const formData = {
+      name: document.getElementById("name").value,
+      phone: document.getElementById("phone").value,
+      service: document.getElementById("service").value,
+      date: document.getElementById("date").value,
+      notes: document.getElementById("notes").value
+    };
+
+    try {
+      const res = await fetch(scriptURL, {
+        method: "POST",
+        body: JSON.stringify(formData),
+        headers: { "Content-Type": "application/json" }
+      });
+
+      const json = await res.json();
+      if (json.status === "success") {
+        document.getElementById("responseMsg").textContent = "✅ Booking submitted!";
+        document.getElementById("bookingForm").reset();
+      } else {
+        document.getElementById("responseMsg").textContent = "❌ Something went wrong.";
+      }
+    } catch (err) {
+      console.error(err);
+      document.getElementById("responseMsg").textContent = "❌ Failed to send data.";
+    }
+  });
+</script>
